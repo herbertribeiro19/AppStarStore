@@ -5,15 +5,21 @@ Aplicativo de Ecommerce, onde o usuário consegue adicionar produtos (da API) ao
 
 ## Tecnologias utilizadas 
 - React Native
+- TypeScript
 - Expo
 - Node.js
 - Axios
 - Context API
 - SQLite
 - Hooks
+- Figma (Logo e Design)
 - XCode (IOS Emulator)
 
 ## Imagens do projeto
+<img width="280" alt="iPhone 15 - StarStore" src="https://github.com/user-attachments/assets/ffdd7f48-81c8-4b3c-8358-9a31b0e4e5b3">
+<img width="280" alt="iPhone 15 - StarStore" src="https://github.com/user-attachments/assets/80fcd1d8-4b2f-4c42-9938-2523c127665a">
+<img width="280" alt="iPhone 15 - StarStore" src="https://github.com/user-attachments/assets/c05f1584-f008-4616-a8ab-d687ad7ad8e3">
+
 
 
 
