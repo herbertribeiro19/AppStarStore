@@ -10,10 +10,12 @@ import Profile from '../pages/Profile';
 import Ionicons from '@expo/vector-icons/Ionicons';
 import Welcome from '../pages/Welcome';
 import Payment from '../pages/Payment';
+import Transactions from '../pages/Transactions';
 
 const Tab = createBottomTabNavigator();
 const Stack = createStackNavigator();
 
+//Aplicando cor default para background
 const MyTheme = {
     ...DefaultTheme,
     colors: {
@@ -28,6 +30,7 @@ function StackNavigator() {
             <Stack.Screen name="Welcome" component={Welcome} />
             <Stack.Screen name="Tabs" component={MainTabs} />
             <Stack.Screen name="Payment" component={Payment} />
+            <Stack.Screen name="Transactions" component={Transactions} />
         </Stack.Navigator>
     );
 }
@@ -63,6 +66,7 @@ function MainTabs() {
                     borderTopRightRadius: 14,
                     height: '9%',
                     padding: 8,
+                    // backgroundColor: "#101010", borderRadius: 40, paddingBottom: 0, overflow: "hidden", marginHorizontal: 14, marginBottom: 20, height: '9%', justifyContent: "space-between", alignItems: "center", position: "absolute", borderTopColor: '#151515',
                 },
                 tabBarHideOnKeyboard: true,
             })}

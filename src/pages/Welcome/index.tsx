@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React from "react";
 import { ImageBackground, Alert, StyleSheet, Text, Image, View, TouchableOpacity } from 'react-native';
 import Ionicons from '@expo/vector-icons/Ionicons';
 import { useNavigation } from '@react-navigation/native';
@@ -9,13 +9,14 @@ export default function Welcome() {
     const logo = require("../../img/logo.png");
 
     function nextStep() {
-        Alert.alert(
-            "Bem vindo(a) a StarStore!",
-            "Aproveite a experiência!",
-            [
-                { text: "Continuar", onPress: () => navigation.navigate("Tabs") },
-            ]
-        );
+        navigation.navigate("Tabs");
+        // Alert.alert(
+        //     "Bem vindo(a) a StarStore!",
+        //     "Aproveite a experiência!",
+        //     [
+        //         { text: "Continuar", onPress: () => navigation.navigate("Tabs"); },
+        //     ]
+        // );
     }
 
     return (

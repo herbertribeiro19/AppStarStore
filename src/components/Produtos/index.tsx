@@ -30,10 +30,11 @@ export default function Produtos({ searchTerm }: ProdutosProps) {
     useEffect(() => {
         axios.get('https://raw.githubusercontent.com/stone-pagamentos/desafio-mobile/master/store/products.json')
             .then(response => {
-                const produtosComId = response.data.map((produto: any, index: number) => ({
+                const produtosComId = response.data.map((produto: any) => ({
                     ...produto,
-                    id: `${index}-${Date.now()}` // Gerando um ID único
+                    id: produto.id ? produto.id.toString() : `${produto.title}-${produto.price}`
                 }));
+
                 setProdutos(produtosComId);
                 setCarregando(false);
                 console.log(response.data);
@@ -105,7 +106,7 @@ export default function Produtos({ searchTerm }: ProdutosProps) {
                                     <Ionicons name="people-circle-outline" size={22} color="#f1f1f1" />
                                     <Text style={styles.seller}> {item.seller}</Text>
                                 </View>
-                                <Text style={styles.preco}>R$ {item.price.toFixed(2)}</Text>
+                                <Text style={styles.preco}>R$ {item.price}</Text>
                                 <TouchableOpacity style={styles.btnComprar} onPress={() => dispatch(addToCart(item))}>
                                     <Ionicons name="cart" size={26} color="#333" />
                                 </TouchableOpacity>

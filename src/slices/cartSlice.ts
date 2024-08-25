@@ -1,4 +1,5 @@
 import { createSlice, PayloadAction } from '@reduxjs/toolkit';
+import { Alert } from 'react-native';
 
 interface Product {
     id: string;
@@ -23,51 +24,47 @@ const initialState: CartState = {
     items: [],
 };
 
+// Esta função está servindo para encontrar o índice do item
+const findItemIndex = (state: CartState, id: string) => {
+    return state.items.findIndex(item => item.product.id === id);
+};
+
 const cartSlice = createSlice({
     name: 'cart',
     initialState,
     reducers: {
         addToCart: (state, action: PayloadAction<Product>) => {
-            const existingItemIndex = state.items.findIndex(item => item.product.id === action.payload.id);
+            const existingItemIndex = findItemIndex(state, action.payload.id);
             if (existingItemIndex >= 0) {
-                // Imutavelmente atualize a quantidade
                 state.items[existingItemIndex] = {
                     ...state.items[existingItemIndex],
                     quantity: state.items[existingItemIndex].quantity + 1,
                 };
-                console.log(`Updated quantity for product ID: ${action.payload.id}`);
             } else {
-                // Adicione o novo item imutavelmente
                 state.items.push({ product: action.payload, quantity: 1 });
-                console.log(`Added new product to cart: ${action.payload.id}`);
             }
+            Alert.alert(
+                "Item adicionado",
+                "O item foi adicionado com sucesso ao carrinho",
+            );
         },
         removeFromCart: (state, action: PayloadAction<string>) => {
             state.items = state.items.filter(item => item.product.id !== action.payload);
         },
         increaseQuantity: (state, action: PayloadAction<string>) => {
-            const itemIndex = state.items.findIndex(item => item.product.id === action.payload);
+            const itemIndex = findItemIndex(state, action.payload);
             if (itemIndex >= 0) {
-                state.items[itemIndex] = {
-                    ...state.items[itemIndex],
-                    quantity: state.items[itemIndex].quantity + 1,
-                };
-                console.log(`Increased quantity for product ID: ${action.payload}`);
+                state.items[itemIndex].quantity += 1;
             }
         },
         decreaseQuantity: (state, action: PayloadAction<string>) => {
-            const itemIndex = state.items.findIndex(item => item.product.id === action.payload);
+            const itemIndex = findItemIndex(state, action.payload);
             if (itemIndex >= 0) {
                 const currentItem = state.items[itemIndex];
                 if (currentItem.quantity > 1) {
-                    state.items[itemIndex] = {
-                        ...currentItem,
-                        quantity: currentItem.quantity - 1,
-                    };
-                    console.log(`Decreased quantity for product ID: ${action.payload}`);
+                    currentItem.quantity -= 1;
                 } else {
                     state.items = state.items.filter(item => item.product.id !== action.payload);
-                    console.log(`Removed product ID: ${action.payload} from cart`);
                 }
             }
         },
