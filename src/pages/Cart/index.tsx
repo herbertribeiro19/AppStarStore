@@ -12,10 +12,12 @@ export default function Cart() {
     const navigation = useNavigation();
     const cartItems = useSelector((state: RootState) => state.cart.items || []);
 
+    //Função para cálcular o valor total dos items, seguindo a idéia de preço x quantidade do produto X
     const calculateTotal = () => {
         return cartItems.reduce((total, item) => total + (item.product.price * item.quantity), 0);
     };
 
+    //Verificação do carrinho, se ele está vazio, não vai ser possível seguir para a tela de pagamento
     const handleCheckout = () => {
         const total = calculateTotal();
         if (total > 0) {

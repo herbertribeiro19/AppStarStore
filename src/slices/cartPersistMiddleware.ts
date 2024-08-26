@@ -7,12 +7,12 @@ const cartPersistMiddleware: Middleware = store => next => async (action: AnyAct
     const result = next(action);
 
     if (action.type.startsWith('cart/')) {
-        // Save state after a cart action
+        // Salva o estado depois da ação no carrinho
         try {
             const state = store.getState();
             await AsyncStorage.setItem(CART_STORAGE_KEY, JSON.stringify(state.cart.items));
         } catch (error) {
-            console.error('Failed to save cart to AsyncStorage', error);
+            console.error('Falha para salvar AsyncStorage', error);
         }
     }
 

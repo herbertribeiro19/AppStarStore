@@ -10,6 +10,7 @@ const statusBarHeight = Constants.statusBarHeight;
 export default function Header() {
   const navigation = useNavigation();
 
+  //Header que estará em todas as telas da aplicação.
   return (
     <View style={styles.headerContainer}>
       <View style={styles.contentHeader}>

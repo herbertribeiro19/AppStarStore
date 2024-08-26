@@ -33,6 +33,8 @@ const cartSlice = createSlice({
     name: 'cart',
     initialState,
     reducers: {
+
+        //Adicionando produtos ao carrinho
         addToCart: (state, action: PayloadAction<Product>) => {
             const existingItemIndex = findItemIndex(state, action.payload.id);
             if (existingItemIndex >= 0) {
@@ -48,15 +50,21 @@ const cartSlice = createSlice({
                 "O item foi adicionado com sucesso ao carrinho",
             );
         },
+
+        //Removendo produtos ao carrinho
         removeFromCart: (state, action: PayloadAction<string>) => {
             state.items = state.items.filter(item => item.product.id !== action.payload);
         },
+
+        //Incrementando produtos ao carrinho
         increaseQuantity: (state, action: PayloadAction<string>) => {
             const itemIndex = findItemIndex(state, action.payload);
             if (itemIndex >= 0) {
                 state.items[itemIndex].quantity += 1;
             }
         },
+
+        //Decrementando produtos ao carrinho
         decreaseQuantity: (state, action: PayloadAction<string>) => {
             const itemIndex = findItemIndex(state, action.payload);
             if (itemIndex >= 0) {

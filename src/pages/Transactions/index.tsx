@@ -5,6 +5,7 @@ import Ionicons from '@expo/vector-icons/Ionicons';
 import axios from 'axios';
 import { LinearGradient } from 'expo-linear-gradient';
 
+//Definindo os tipos de dados relacionadas a API
 interface Transacao {
     id: number;
     value: number;
@@ -19,8 +20,10 @@ export default function Transactions() {
     const [transacoes, setTransacoes] = useState<Transacao[]>([]);
     const [error, setError] = useState<string | null>(null);
 
-    const BASE_URL = Platform.OS === 'ios' ? 'http://localhost:3000' : 'http://10.0.2.2:3000';
+    //Verificando a plataforma para aplicar a devida URL de localhost
+    const BASE_URL = Platform.OS === 'ios' ? 'http://localhost:3000' : 'http://10.0.2.2/3000';
 
+    //Fazendo o GET na API
     useEffect(() => {
         axios.get(`${BASE_URL}/transactions`)
             .then(response => {
@@ -33,7 +36,7 @@ export default function Transactions() {
             });
     }, []);
 
-
+    //Formatando a data que vem da API para ficar da forma correta
     const formatDate = (dateTime: string) => {
         const date = new Date(dateTime);
         const day = String(date.getDate()).padStart(2, '0');
@@ -123,9 +126,10 @@ const styles = StyleSheet.create({
         alignItems: "center",
         marginTop: 10,
         borderRadius: 20,
-        padding: 20,
-        width: "78%",
+        width: "90%",
         gap: 20,
+        paddingHorizontal: 22,
+        paddingVertical: 36,
     },
     up: {
         flexDirection: "row",
@@ -135,7 +139,7 @@ const styles = StyleSheet.create({
     },
     down: {
         flexDirection: "row",
-        alignItems: "center",
+        alignSelf: "flex-start",
         width: "90%",
         justifyContent: "space-between",
     },

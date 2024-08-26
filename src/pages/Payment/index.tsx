@@ -12,22 +12,22 @@ export default function Payment({ route }) {
     const [valueNumber, setValueNumber] = useState('');
     const [valueCVV, setValueCVV] = useState('');
     const [nameValue, setNameValue] = useState('');
-    const BASE_URL = Platform.OS === 'ios' ? 'http://localhost:3000' : 'http://10.0.2.2:3000';
 
+    //Verificação da plataforma para aplicar a devida URL de locahost
+    const BASE_URL = Platform.OS === 'ios' ? 'http://localhost:3000' : 'http://10.0.2.2/3000';
+
+    //Máscaras relacionadas aos campos de input do payment
     const TextMaskName = (text) => {
         setNameValue(text);
     };
-
     const TextMaskOnlyNumber = (text) => {
         let formattedText = text.replace(/\D/g, '');
         setValueNumber(formattedText);
     };
-
     const TextMaskOnlyNumberCVC = (text) => {
         let formattedText = text.replace(/\D/g, '');
         setValueCVV(formattedText);
     };
-
     const TextMaskData = (text) => {
         let formattedText = text.replace(/\D/g, '');
 
@@ -56,6 +56,7 @@ export default function Payment({ route }) {
         setValue(formattedText);
     };
 
+    //Verificando as máscaras, e se estiver tudo de acordo, realiza o POST na API e banco
     const FinishPayment = async () => {
         if (
             valueNumber.length > 15 &&
@@ -91,7 +92,7 @@ export default function Payment({ route }) {
                     );
                 }
             } catch (error) {
-                console.error("Erro ao processar o pagamento:", error);
+                console.log("Erro ao processar o pagamento:", error);
                 Alert.alert(
                     "Dados inválidos",
                     "Os dados estão inválidos",
@@ -204,7 +205,6 @@ const styles = StyleSheet.create({
         padding: 14,
         color: '#fff',
         fontSize: 14,
-        textTransform: 'uppercase',
         marginVertical: 5,
         borderColor: "#f1f1f1",
         borderWidth: 0.2,

@@ -1,5 +1,6 @@
 import { View, TouchableOpacity, Image, StyleSheet } from 'react-native';
 
+//Componente que apresenta o Banner do produto na Home
 export default function Banner() {
     return (
         <View>

@@ -24,6 +24,7 @@ const MyTheme = {
     },
 };
 
+// Função de configuração do stack navigator, para navegação entre as páginas.
 function StackNavigator() {
     return (
         <Stack.Navigator screenOptions={{ headerShown: false }}>
@@ -35,6 +36,7 @@ function StackNavigator() {
     );
 }
 
+//Função para configurar o TabBottom e sua navegação
 function MainTabs() {
     return (
         <Tab.Navigator
@@ -66,7 +68,6 @@ function MainTabs() {
                     borderTopRightRadius: 14,
                     height: '9%',
                     padding: 8,
-                    // backgroundColor: "#101010", borderRadius: 40, paddingBottom: 0, overflow: "hidden", marginHorizontal: 14, marginBottom: 20, height: '9%', justifyContent: "space-between", alignItems: "center", position: "absolute", borderTopColor: '#151515',
                 },
                 tabBarHideOnKeyboard: true,
             })}

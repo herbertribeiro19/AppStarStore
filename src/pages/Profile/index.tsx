@@ -6,6 +6,7 @@ import { useNavigation } from '@react-navigation/native';
 export default function Profile() {
     const navigation = useNavigation();
 
+    //Funçao para sair para a página inicial do APP
     function btnLeave() {
         Alert.alert(
             "Você está saindo para a página inicial",

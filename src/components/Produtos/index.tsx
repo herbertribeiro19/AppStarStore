@@ -27,9 +27,12 @@ export default function Produtos({ searchTerm }: ProdutosProps) {
     const [selectedCategory, setSelectedCategory] = useState<string>('');
     const dispatch = useDispatch();
 
+    //Carregando os produtos da API disponibilizada no Desafio
     useEffect(() => {
         axios.get('https://raw.githubusercontent.com/stone-pagamentos/desafio-mobile/master/store/products.json')
             .then(response => {
+
+                //Gerando ID único para os produtos, necessário para adicionar ao carrinho sem que haja duplicidade
                 const produtosComId = response.data.map((produto: any) => ({
                     ...produto,
                     id: produto.id ? produto.id.toString() : `${produto.title}-${produto.price}`
@@ -49,12 +52,12 @@ export default function Produtos({ searchTerm }: ProdutosProps) {
     if (carregando) {
         return (
             <View>
-                <Text>Carregando</Text>
-                <ActivityIndicator color="#091833" size="large" />
+                <ActivityIndicator color="#fff" size="large" style={styles.carregando} />
             </View>
         );
     }
 
+    //Função para filtrar os produtos no Input de pesquisa
     const filteredProducts = produtos.filter((produto) =>
         produto.title.toLowerCase().includes(searchTerm.toLowerCase()) &&
         (selectedCategory ? produto.title.toLowerCase().includes(selectedCategory.toLowerCase()) : true)
@@ -62,9 +65,9 @@ export default function Produtos({ searchTerm }: ProdutosProps) {
 
     return (
         <View style={styles.BoxContent}>
-
             <Text style={styles.TextTitle}>Categorias</Text>
             <Text style={styles.subTitle}>Selecione o produto relacionado ao personagem</Text>
+
             <ScrollView horizontal={true} showsHorizontalScrollIndicator={false}>
                 <View style={styles.contentCategories}>
                     <TouchableOpacity style={styles.categories} onPress={() => setSelectedCategory('')}>
@@ -122,6 +125,9 @@ export default function Produtos({ searchTerm }: ProdutosProps) {
 
 
 const styles = StyleSheet.create({
+    carregando: {
+        alignSelf: "center",
+    },
     BoxContent: {
         margin: 10,
         marginBottom: 100,
