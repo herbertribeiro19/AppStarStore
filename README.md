@@ -2,7 +2,7 @@
 
 ## Sobre
 
-Aplicativo de Ecommerce, onde o usuário consegue adicionar produtos (da API) ao carrinho e finalizar o processo de compras, adicionando dados do cartão de crédito que é salvo no banco de dados junto com as informações do usuário. (Ainda em desenvolvimento)
+Aplicativo de Ecommerce, onde o usuário consegue adicionar produtos (da API) ao carrinho e finalizar o processo de compras, adicionando dados do cartão de crédito que é salvo no banco de dados junto com as informações do usuário. Além de telas de registro e login para autenticação.
 
 ## Tecnologias/Ferramentas utilizadas
 
@@ -10,6 +10,9 @@ Aplicativo de Ecommerce, onde o usuário consegue adicionar produtos (da API) ao
 - TypeScript
 - Expo
 - NodeJs
+- Bcrypt
+- Express
+- Sequelize
 - PostGres
 - NGROK
 - Postman
@@ -19,9 +22,9 @@ Aplicativo de Ecommerce, onde o usuário consegue adicionar produtos (da API) ao
 
 ## Imagens do projeto
 
-<img width="280" alt="iPhone 15 - StarStore" src="https://github.com/user-attachments/assets/ffdd7f48-81c8-4b3c-8358-9a31b0e4e5b3">
-<img width="280" alt="iPhone 15 - StarStore" src="https://github.com/user-attachments/assets/80fcd1d8-4b2f-4c42-9938-2523c127665a">
-<img width="280" alt="iPhone 15 - StarStore" src="https://github.com/user-attachments/assets/c05f1584-f008-4616-a8ab-d687ad7ad8e3">
+<div style="width: 140px; display: flex; flex-direction: row; gap: 10px;">
+
+</div>
 
 # Clone o repositório
 
@@ -46,3 +49,7 @@ Aplicativo de Ecommerce, onde o usuário consegue adicionar produtos (da API) ao
 # Iniciar no Android
 
 > npx expo start --android
+
+# Observações
+
+> Para rodar o projeto é necessário realizar a inicialização da API localmente, conforme é específicado nesse repositório: https://github.com/herbertribeiro19/apiStore

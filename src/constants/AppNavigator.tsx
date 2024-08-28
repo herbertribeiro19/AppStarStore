@@ -8,9 +8,10 @@ import Home from '../pages/Home';
 import Cart from '../pages/Cart';
 import Profile from '../pages/Profile';
 import Ionicons from '@expo/vector-icons/Ionicons';
-import Welcome from '../pages/Welcome';
 import Payment from '../pages/Payment';
 import Transactions from '../pages/Transactions';
+import Login from '../pages/Login';
+import Register from '../pages/Register';
 
 const Tab = createBottomTabNavigator();
 const Stack = createStackNavigator();
@@ -28,10 +29,11 @@ const MyTheme = {
 function StackNavigator() {
     return (
         <Stack.Navigator screenOptions={{ headerShown: false }}>
-            <Stack.Screen name="Welcome" component={Welcome} />
+            <Stack.Screen name="Login" component={Login} />
             <Stack.Screen name="Tabs" component={MainTabs} />
             <Stack.Screen name="Payment" component={Payment} />
             <Stack.Screen name="Transactions" component={Transactions} />
+            <Stack.Screen name="Register" component={Register} />
         </Stack.Navigator>
     );
 }

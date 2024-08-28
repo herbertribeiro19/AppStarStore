@@ -4,6 +4,7 @@ import Header from '../../components/Header';
 import Ionicons from '@expo/vector-icons/Ionicons';
 import { useNavigation } from '@react-navigation/native';
 import axios from 'axios';
+import * as SecureStore from 'expo-secure-store';
 
 export default function Payment({ route }) {
     const navigation = useNavigation();
@@ -13,8 +14,8 @@ export default function Payment({ route }) {
     const [valueCVV, setValueCVV] = useState('');
     const [nameValue, setNameValue] = useState('');
 
-    //Verificação da plataforma para aplicar a devida URL de locahost
-    const BASE_URL = Platform.OS === 'ios' ? 'http://localhost:3000' : 'http://10.0.2.2/3000';
+    //Verificação da plataforma para aplicar a devida URL de localhost
+    const BASE_URL = Platform.OS === 'ios' ? 'https://5072-179-189-87-179.ngrok-free.app' : 'http://10.0.2.2:3000';
 
     //Máscaras relacionadas aos campos de input do payment
     const TextMaskName = (text) => {
@@ -60,12 +61,22 @@ export default function Payment({ route }) {
     const FinishPayment = async () => {
         if (
             valueNumber.length > 15 &&
-            totalAmount.length !== '' &&
             valueCVV.length > 2 &&
             value.length > 3 &&
             nameValue !== ''
         ) {
+
+            //Pegando TOKEN
+            const getToken = async () => {
+                const token = await SecureStore.getItemAsync('userToken');
+                return token;
+            };
+
             try {
+                const token = await getToken();
+                if (!token) {
+                    throw new Error('Token não encontrado');
+                }
                 const response = await axios.post(`${BASE_URL}/transaction`, {
                     card_number: valueNumber,
                     value: totalAmount,
@@ -75,6 +86,7 @@ export default function Payment({ route }) {
                 }, {
                     headers: {
                         'Content-Type': 'application/json',
+                        'Authorization': `Bearer ${token}`,
                     }
                 });
                 if (response.status === 201) {
@@ -101,7 +113,7 @@ export default function Payment({ route }) {
         } else {
             Alert.alert(
                 "Dados incorretos",
-                "Preencha as informações do cartão de crédito da forma correta para adicionar o cartão",
+                "Verifique o preenchimento dos campos e tente novamente",
             );
         }
     };
@@ -196,7 +208,6 @@ const styles = StyleSheet.create({
         borderRadius: 20,
         padding: 20,
         width: '98%',
-        // Removido 'height' para permitir flexibilidade
         alignContent: 'center',
         justifyContent: 'center',
         position: "relative",

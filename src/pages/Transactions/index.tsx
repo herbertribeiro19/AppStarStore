@@ -4,6 +4,8 @@ import Header from '../../components/Header';
 import Ionicons from '@expo/vector-icons/Ionicons';
 import axios from 'axios';
 import { LinearGradient } from 'expo-linear-gradient';
+import * as SecureStore from 'expo-secure-store';
+
 
 //Definindo os tipos de dados relacionadas a API
 interface Transacao {
@@ -21,19 +23,36 @@ export default function Transactions() {
     const [error, setError] = useState<string | null>(null);
 
     //Verificando a plataforma para aplicar a devida URL de localhost
-    const BASE_URL = Platform.OS === 'ios' ? 'http://localhost:3000' : 'http://10.0.2.2/3000';
+    const BASE_URL = Platform.OS === 'ios' ? 'https://5072-179-189-87-179.ngrok-free.app' : 'http://10.0.2.2:3000';
+
+    //Pegando TOKEN
+    const getToken = async () => {
+        const token = await SecureStore.getItemAsync('userToken');
+        return token;
+    };
 
     //Fazendo o GET na API
     useEffect(() => {
-        axios.get(`${BASE_URL}/transactions`)
-            .then(response => {
+        const fetchData = async () => {
+            try {
+                const token = await getToken();
+                if (!token) {
+                    throw new Error('Token não encontrado');
+                }
+                const response = await axios.get(`${BASE_URL}/transactions`, {
+                    headers: {
+                        'Content-Type': 'application/json',
+                        'Authorization': `Bearer ${token}`
+                    },
+                });
                 setTransacoes(response.data);
                 console.log(response.data);
-            })
-            .catch(error => {
-                setError('Erro ao carregar produtos');
-                console.log("ERRO AO CARREGAR!");
-            });
+            } catch (error) {
+                setError('Erro ao carregar transações');
+                console.log("ERRO AO CARREGAR!", error);
+            }
+        };
+        fetchData();
     }, []);
 
     //Formatando a data que vem da API para ficar da forma correta

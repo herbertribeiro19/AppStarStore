@@ -2,9 +2,16 @@ import { View, Text, StyleSheet, TouchableOpacity, Alert } from 'react-native';
 import Header from '../../components/Header';
 import Ionicons from '@expo/vector-icons/Ionicons';
 import { useNavigation } from '@react-navigation/native';
+import * as SecureStore from 'expo-secure-store';
 
 export default function Profile() {
     const navigation = useNavigation();
+
+    function logout() {
+        SecureStore.deleteItemAsync('userToken');
+        console.log("Usuário deslogado e token removido.");
+        navigation.navigate("Login");
+    };
 
     //Funçao para sair para a página inicial do APP
     function btnLeave() {
@@ -13,7 +20,7 @@ export default function Profile() {
             "Tem certeza que deseja sair?",
             [
                 { text: "Não", onPress: () => navigation.navigate('Profile') },
-                { text: "Sim", onPress: () => navigation.navigate('Welcome') },
+                { text: "Sim", onPress: () => logout() },
             ]
         );
     }
