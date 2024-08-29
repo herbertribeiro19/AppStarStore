@@ -13,7 +13,7 @@ export default function Login() {
     const [password, setPassword] = useState('');
 
     useEffect(() => {
-        // Recupera os dados armazenados nos campos de login e senha ao carregar a tela
+        // Recupera os dados armazenados nos campos de login e senha ao carregar a tela (Async)
         const loadCredentials = async () => {
             const storedEmail = await SecureStore.getItemAsync('userEmail');
             const storedPassword = await SecureStore.getItemAsync('userPassword');
@@ -47,17 +47,17 @@ export default function Login() {
                 }
             });
             if (response.status === 200) {
-                const { token } = response.data; // Pegue apenas o token do response
-                await SecureStore.setItemAsync('userToken', token); // Armazena o token de forma segura
-                await SecureStore.setItemAsync('userEmail', email); // Armazena o email de forma segura
-                await SecureStore.setItemAsync('userPassword', password); // Armazena a senha de forma segura
+                const { token } = response.data; // Vai pegar apenas o token do response
+                await SecureStore.setItemAsync('userToken', token); // Vai armazenar o token de forma segura
+                await SecureStore.setItemAsync('userEmail', email); // Vai armazenar o email de forma segura
+                await SecureStore.setItemAsync('userPassword', password); // Vai armazenar a senha de forma segura
                 console.log("Token armazenado com sucesso!");
 
                 // Navega para a página inicial após o login bem-sucedido
                 navigation.navigate("Tabs");
             } else {
                 console.log("Erro ao fazer o login: ");
-                Alert.alert("ERRO!", "Ocorreu um erro ao tentar fazer o login.");
+                Alert.alert("ERRO", "Ocorreu um erro ao tentar fazer o login.");
             }
         } catch (error) {
             console.log("Erro no login. ", error);
