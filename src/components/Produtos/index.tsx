@@ -37,7 +37,6 @@ export default function Produtos({ searchTerm }: ProdutosProps) {
                     ...produto,
                     id: produto.id ? produto.id.toString() : `${produto.title}-${produto.price}`
                 }));
-
                 setProdutos(produtosComId);
                 setCarregando(false);
                 console.log(response.data);

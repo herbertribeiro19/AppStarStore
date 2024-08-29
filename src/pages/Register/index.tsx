@@ -14,21 +14,18 @@ export default function Register() {
 
     const TextName = (text) => {
         setName(text);
-        console.log(name);
     };
 
     const TextEmail = (text) => {
         setEmail(text);
-        console.log(email);
     };
 
     const TextPassword = (text) => {
         setPassword(text);
-        console.log(password);
     };
 
     //Verificação da plataforma para aplicar a devida URL de locahost
-    const BASE_URL = Platform.OS === 'ios' ? 'https://5072-179-189-87-179.ngrok-free.app' : 'http://10.0.2.2:3000';
+    const BASE_URL = Platform.OS === 'ios' ? 'https://95db-179-189-87-179.ngrok-free.app' : 'https://95db-179-189-87-179.ngrok-free.app';
 
     const CreateRegister = async () => {
         if (name != '' && email != '' && password != '') {
