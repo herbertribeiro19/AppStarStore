@@ -34,7 +34,7 @@ export default function Login() {
     };
 
     //Verificação da plataforma para aplicar a devida URL de localhost
-    const BASE_URL = Platform.OS === 'ios' ? 'https://95db-179-189-87-179.ngrok-free.app' : 'https://95db-179-189-87-179.ngrok-free.app';
+    const BASE_URL = Platform.OS === 'ios' ? 'http://localhost:3000' : 'http://10.0.0.2:3000';
 
     const UserLogin = async () => {
         try {

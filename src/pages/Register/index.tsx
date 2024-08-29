@@ -24,8 +24,8 @@ export default function Register() {
         setPassword(text);
     };
 
-    //Verificação da plataforma para aplicar a devida URL de locahost
-    const BASE_URL = Platform.OS === 'ios' ? 'https://95db-179-189-87-179.ngrok-free.app' : 'https://95db-179-189-87-179.ngrok-free.app';
+    //Verificação da plataforma para aplicar a devida URL de localhost
+    const BASE_URL = Platform.OS === 'ios' ? 'http://localhost:3000' : 'http://10.0.0.2:3000';
 
     const CreateRegister = async () => {
         if (name != '' && email != '' && password != '') {
